@@ -5,7 +5,7 @@ import { logout } from "../state/auth/authSlice";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [secretCode, setSecretCode] = useState(null);
   const dispatch = useDispatch();
 
@@ -17,7 +17,7 @@ const Login = () => {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ id: username, fplname: password }) // Send username as id and password as fplname
+        body: JSON.stringify({ username: username, password: password }) // Send username as id and password as fplname
       });
   
       if (!response.ok) {
@@ -64,13 +64,11 @@ const Login = () => {
           <input
             type="text"
             placeholder="Username"
-            value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
           <input
             type="text"
             placeholder="Password"
-            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <button onClick={handleLogin}>Login</button>

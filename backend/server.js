@@ -11,7 +11,7 @@ const pool = require('./db');
 app.use(express.json());
 app.get('/', (req, res) => {
   // Send the index.html file from the build directory
-  res.sendFile(path.join(__dirname, '../src/index.html'));
+  res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
 
@@ -30,10 +30,10 @@ pool.query('SELECT NOW()', (err, result) => {
 // Change from '/login' to '/api/login'
 app.post("/api/login", async (req, res) => {
   try {
-    const { id, fplname } = req.body;
+    const { username, password} = req.body;
 
     // Authenticate the user
-    const userId = await authenticateUser(id, fplname);
+    const userId = await authenticateUser(username, password);
 
     if (userId) {
       // Send a JSON response for successful login
