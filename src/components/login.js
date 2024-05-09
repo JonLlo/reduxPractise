@@ -12,7 +12,7 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       // Send a request to your backend server to authenticate the user
-      const response = await fetch("http://localhost:3000/api/login", {
+      const response = await fetch("/api/login", {
         method: "POST", // Change method to "POST"
         headers: {
           "Content-Type": "application/json"
@@ -31,7 +31,7 @@ const Login = () => {
       const data = await response.json();
       setIsAuthenticated(true);
     } catch (error) {
-      console.error("We have an error:", error);
+      console.log(error.message);
       alert(`bosh ${error.message}`);
     }
   };
@@ -41,7 +41,6 @@ const Login = () => {
 
   const handleLogout = () => {
     setIsAuthenticated(false);
-    setSecretCode(null);
     dispatch(logout()); // Dispatch the logout action
   };
 

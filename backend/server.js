@@ -11,14 +11,12 @@ const pool = require('./db');
 app.use(express.json());
 app.get('/', (req, res) => {
   // Send the index.html file from the build directory
-  res.sendFile(path.join(__dirname, './src/index.html'));
+  res.sendFile(path.join(__dirname, '../src/index.html'));
 });
 
 
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+
 
 pool.query('SELECT NOW()', (err, result) => {
   if (err) {
@@ -48,7 +46,12 @@ app.post("/api/login", async (req, res) => {
     // Log the error for debugging
     console.error('Error logging in:', error);
     // Send a JSON response for internal server error
-    res.status(500).json({ message: 'Internal server error!' });
+    res.status(500).json({ message: 'Oh no we hav an internal server error!' });
   }
 });
 
+
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
